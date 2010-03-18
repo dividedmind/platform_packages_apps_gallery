@@ -264,6 +264,9 @@ public class ImageGallery extends Activity implements
                             this, mDeletePhotoRunnable, getCurrentImage());
                 }
                 return true;
+            case KeyEvent.KEYCODE_ENTER:
+                onImageClicked(mGvs.getCurrentSelection());
+                return true;
         }
         return super.onKeyDown(keyCode, event);
     }
