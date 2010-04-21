@@ -265,7 +265,24 @@ public class ImageGallery extends Activity implements
                 }
                 return true;
         }
+        if ((keyCode == KeyEvent.KEYCODE_ENTER
+             || keyCode == KeyEvent.KEYCODE_DPAD_CENTER)
+            && event.getRepeatCount() == 0) {
+            event.startTracking();
+            return true;
+        }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_ENTER
+             || keyCode == KeyEvent.KEYCODE_DPAD_CENTER)
+            && event.isTracking() && !event.isCanceled()) {
+            onImageClicked(mGvs.getCurrentSelection());
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     private boolean isPickIntent() {
