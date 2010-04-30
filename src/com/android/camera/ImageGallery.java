@@ -268,6 +268,16 @@ public class ImageGallery extends Activity implements
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER
+                || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+            onImageClicked(mGvs.getCurrentSelection());
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
     private boolean isPickIntent() {
         String action = getIntent().getAction();
         return (Intent.ACTION_PICK.equals(action)
